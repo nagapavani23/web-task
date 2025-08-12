@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REPO = "bindreshbabu/task-webapp"
+        DOCKER_REPO = "nagapavani2301/task-webapp"
         IMAGE_TAG = "v${BUILD_NUMBER}"
         FULL_IMAGE = "${DOCKER_REPO}:${IMAGE_TAG}"
     }
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/indresh303/task.git'
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/nagapavani23/web-task.git'
             }
         }
 
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        az aks get-credentials --resource-group indresh --name task
+                        az aks get-credentials --resource-group pavani --name webapp
 
                         sed "s|__IMAGE__|${FULL_IMAGE}|" k8s/deployment.yaml > k8s/deployment-updated.yaml
 
