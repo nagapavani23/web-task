@@ -33,7 +33,7 @@ pipeline {
 
         stage('Login to Azure') {
             steps {
-                withCredentials([string(credentialsId: 'AZURE_CREDENTIALS_JSON', variable: 'AZURE_CREDENTIALS')]) {
+                withCredentials([string(credentialsId: 'azure-sp-sdk-auth', variable: 'AZURE_CREDENTIALS')]) {
                     sh '''
                         CLIENT_ID=$(echo "$AZURE_CREDENTIALS" | jq -r .clientId)
                         CLIENT_SECRET=$(echo "$AZURE_CREDENTIALS" | jq -r .clientSecret)
